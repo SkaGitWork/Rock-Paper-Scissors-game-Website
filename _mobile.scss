@@ -1,0 +1,236 @@
+/* --------------------------------- Mobile 375px 
+--------------------------------- */
+:root {
+  --light_shadow_var: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Barlow Semi Condensed", sans-serif;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 1.5px;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-image: linear-gradient(to bottom right, $bg_color);
+}
+
+/* --------------------------------- Wrapper -------------------------------- */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100vh;
+  padding: 2rem;
+}
+
+/* --------------------------------- Header --------------------------------- */
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  border-radius: 10px;
+  border: 3px solid $header_outline;
+
+  padding: 0.5rem;
+  height: 14vh;
+
+  @media only screen and (min-width:768px) and     (max-width:1366px){
+    height: 16vh;
+  }
+
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+
+  &__logo {
+    margin: 0.5rem;
+    width: 30%;
+  }
+
+  &__display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+
+    height: 100%;
+    aspect-ratio: 1/1;
+
+    &__score {
+      color: $score_text_color;
+      font-size: 0.8rem;
+    }
+
+    &__number {
+      color: $score_color;
+      font-size: 2.1rem;
+    }
+  }
+}
+
+/* --------------------------------- Button --------------------------------- */
+@include btn_creator(100%);
+
+/* --------------------------------- Step 1 --------------------------------- */
+.content--step-1 {
+  position: relative;
+  display: grid;
+  grid-template-rows: 50%;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  justify-items: center;
+
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: calc(33% / 8);
+
+  background-image: url("images/bg-triangle.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+
+  z-index: 0;
+}
+
+.btn-container:nth-child(2) {
+  grid-row: 2/3;
+  grid-column: 2/3;
+}
+.btn-container:nth-child(3) {
+  grid-column: 3/4;
+}
+
+/* --------------------------------- Step 2 --------------------------------- */
+.content--step-2 {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  justify-content: space-between;
+  grid-template-columns: 35% 35%;
+
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: calc(33% / 8);
+
+  @media only screen and (min-width:768px) and     (max-width:1366px){
+    padding: 0;
+
+  }
+
+}
+
+.content--step-2__yourPicked {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+
+  transition: transform 1s linear;
+}
+
+.content--step-2__housePicked {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+
+  transition: transform 1s linear;
+}
+
+.btn__text {
+  margin-top: 20%;
+
+  letter-spacing: 1px;
+  color: white;
+}
+
+.content--step-2__housePicked .btn__text {
+  width: 150%;
+}
+
+/* --------------------------------- Result --------------------------------- */
+.result {
+  margin: 0 auto;
+  text-align: center;
+
+  &__title {
+    font-size: Min(64px, 15vw);
+  }
+
+  &__play-again {
+    padding: 1rem;
+    margin-top: 1rem;
+    width: 110%;
+    position: relative;
+    right: 5%;
+
+    border-radius: 10px;
+    border: 0;
+    background-color: #fff;
+
+    color: hsl(229, 25%, 31%);
+    font-size: 1rem;
+  }
+}
+
+/* --------------------------------- Footer --------------------------------- */
+.footer {
+  text-align: center;
+
+  &__title {
+    padding: 0.5rem 2rem;
+    font-size: 1rem;
+
+    border-radius: 10px;
+    border: 2px solid rgb(243, 243, 243);
+  }
+}
+
+/* ---------------------------------- Rules --------------------------------- */
+.rules__title {
+  color: #000;
+  text-align: center;
+}
+
+.rules-container {
+  display: none;
+}
+
+#rules-btn {
+  display: none;
+
+  &:checked ~ .rules-bg .rules-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    position: absolute;
+    inset: 0;
+
+    background-color: #fff;
+    z-index: 1;
+  }
+}

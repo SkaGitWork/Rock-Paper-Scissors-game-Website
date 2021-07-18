@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap");
+
+/* -------------------------------- Sass Converter ------------------------------- */
+$baseSize: 16px;
+$convertBase: $baseSize;
+@function convert($value, $convertUnit, $convertBase: $convertBase) {
+  $currentUnit: unit($value);
+  $strippedValue: $value / ($value * 0 + 1);
+  @if not unitless($convertBase) {
+    @if unit($convertBase) != px {
+      @error "Not supported unit '#{unit($convertBase)}' as convert base!";
+    }
+    $convertBase: $convertBase / ($convertBase * 0 + 1);
+  }
+
+  @if $currentUnit == px {
+    @if $convertUnit == "em" {
+      @return 0em + ($strippedValue / $convertBase);
+    } @else if $convertUnit == "%" {
+      @return percentage($strippedValue / $convertBase);
+    }
+  } @else if $currentUnit == em {
+    @if $convertUnit == "px" {
+      @return 0px + ($strippedValue * $convertBase);
+    } @else if $convertUnit == "%" {
+      @return percentage($strippedValue);
+    }
+  } @else if $currentUnit == "%" {
+    @if $convertUnit == "px" {
+      @return 0em + ($strippedValue * $convertBase / 100);
+    } @else if $convertUnit == "em" {
+      @return 0em + ($strippedValue / 100);
+    }
+  } @else if $currentUnit == pt {
+    @if $convertUnit == "px" {
+      @return 0px + ($strippedValue * 1.3333);
+    } @else if $convertUnit == "em" {
+      @return 0em + ($strippedValue / 12);
+    } @else if $convertUnit == "%" {
+      @return percentage($strippedValue / 12);
+    }
+  }
+  @error "Can't convert '#{$value}' to unit '#{$convertUnit}'!";
+}
+
+/* ----------------------------- Button creator ----------------------------- */
+
+@mixin fading_shadow($shadow_distance) {
+  $opacity_shadow: 0.03;
+
+  box-shadow: 0 0 0 $shadow_distance rgba(255, 255, 255, $opacity_shadow),
+    0 0 0 $shadow_distance * 2 rgba(255, 255, 255, $opacity_shadow - 0.01),
+    0 0 0 $shadow_distance * 3 rgba(255, 255, 255, $opacity_shadow - 0.02);
+}
+
+@mixin btn_creator(
+  $width,
+  $border_width: $width/8,
+  $inner_offset: $width/18,
+  $outer_offset: $width/45
+) {
+  .btn-container {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+
+    width: $width;
+    aspect-ratio: 1/1;
+
+    background-color: $score_color;
+    border-radius: 50%;
+    border: 0;
+
+    margin: $border_width;
+
+    // Border
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      margin: -$border_width;
+      margin-bottom: -$border_width + $outer_offset;
+      border-radius: inherit;
+      z-index: -1;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      top: $inner_offset;
+
+      border-radius: inherit;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 50%;
+    }
+  }
+
+  .btn--scissors {
+    background-color: $btn_bg_color_shadow;
+
+    &::after {
+      background-color: $btn_bg_color;
+      background-image: url("images/icon-scissors.svg");
+    }
+
+    &::before {
+      background: linear-gradient($scissors_color);
+      box-shadow: 0 convert($outer_offset, "px") 0 0 $scissors_color_shadow;
+    }
+  }
+  .btn--paper {
+    background-color: $btn_bg_color_shadow;
+
+    &::after {
+      background-color: $btn_bg_color;
+      background-image: url("images/icon-paper.svg");
+    }
+
+    &::before {
+      background: linear-gradient($paper_color);
+      box-shadow: 0 convert($outer_offset, "px") 0 0 $paper_color_shadow;
+    }
+  }
+
+  .btn--rock {
+    background-color: $btn_bg_color_shadow;
+
+    &::after {
+      background-color: $btn_bg_color;
+
+      background-image: url("images/icon-rock.svg");
+    }
+
+    &::before {
+      background: linear-gradient($rock_color);
+      box-shadow: 0 convert($outer_offset, "px") 0 0 $rock_color_shadow;
+    }
+  }
+
+  .btn--light {
+    position: absolute;
+    inset: -$border_width;
+    border-radius: inherit;
+    @include fading_shadow(convert($width/6, "px"));
+
+    // Animation
+    opacity: var(--light_shadow_var);
+    transition: opacity 1s linear;
+  }
+}
+
+/* -------------------------------- Variable ------------------------------- */
+$bg_color: hsl(214, 47%, 23%), hsl(237, 49%, 15%);
+
+$scissors_color: hsl(39, 89%, 49%), hsl(40, 84%, 48%);
+$scissors_color_shadow: #c76c17;
+
+$paper_color: hsl(230, 89%, 62%), hsl(230, 89%, 60%);
+$paper_color_shadow: #2a45c2;
+
+$rock_color: hsl(349, 71%, 52%), hsl(349, 70%, 51%);
+$rock_color_shadow: #9a1833;
+
+$score_color: hsl(229, 25%, 31%);
+$score_text_color: hsl(229, 64%, 46%);
+$header_outline: hsl(217, 16%, 45%);
+
+$btn_bg_color: rgb(200, 200, 200);
+$btn_bg_color_shadow: #a6adbf;

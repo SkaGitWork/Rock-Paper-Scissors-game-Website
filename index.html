@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Rock, Paper, Scissors game</title>
+</head>
+<body>
+
+  <div class="wrapper">
+    <!-- ------------------------------- Header -------------------------------- -->
+
+    <header class="header">
+
+      <img class="header__logo" src="images/logo.svg" alt="">
+
+
+      <div class="header__display">
+
+        <h4 class="header__display__score">
+          Score
+        </h4>
+
+        <h1 id='score' class="header__display__number">
+          0
+        </h1>
+      </div>
+
+    </header>
+
+    <!-- ------------------------------- Step 1 -------------------------------- -->
+
+    <div id='js-content--step-1' class="content--step-1">
+
+
+      <button id='js-scissors' class="btn-container btn--scissors"
+        onclick="playAudio('audio/click.mp3');step_1('btn--scissors')"></button>
+
+
+      <button id='js-paper' class="btn-container btn--paper"
+        onclick="playAudio('audio/click.mp3');step_1('btn--paper');playAudio()"></button>
+
+
+      <button id='js-rock' class="btn-container btn--rock"
+        onclick="playAudio('audio/click.mp3');step_1('btn--rock');playAudio()"></button>
+
+    </div>
+
+    <!-- ------------------------------ Step 2 and 3 ------------------------------- -->
+    <!-- -------------------------------- User --------------------------------- -->
+
+    <div id='js-content--step-2' class="content--step-2 box-hidden">
+
+      <div class="content--step-2__yourPicked" id="js-content--step-2__yourPicked">
+
+        <button id='js-user-choice' class="btn-container"><div class="btn--light"></div></button>
+
+
+        <h4 class="btn__text">You picked</h4>
+      </div>
+
+      <!-- -------------------------------- House -------------------------------- -->
+
+      <div class="content--step-2__housePicked" id="js-content--step-2__housePicked">
+
+        <button class="btn-container" id='js-house-choice'></button>
+
+        <h4 class="btn__text">The house picked</h4>
+      </div>
+    </div>
+
+    <!-- ---------------------------- Step 4 Result ---------------------------- -->
+
+    <div id="js-result" class="result box-hidden">
+
+        <h1 id='js-result__title' class="result__title">
+          You win
+        </h1>
+
+        <button class="result__play-again" id="js-play-again" onclick="playAudio('audio/click.mp3');reset()"
+          disabled>Play
+          again</button>
+
+    </div>
+
+
+    <!-- ------------------------------- Footer -------------------------------- -->
+
+    <footer class="footer">
+
+      <label for="rules-btn" class="footer__title" onclick="playAudio('audio/click.mp3')">Rules</label>
+
+      <input type="checkbox" id='rules-btn'>
+
+      <div class="rules-bg">
+
+        <div class="rules-container">
+
+          <h1 class="rules__title">Rules</h1>
+
+          <img class="rules-img" src="images/image-rules.svg" alt="">
+
+          <label for="rules-btn" class="cross" onclick="playAudio('audio/click.mp3')"></label>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</body>
+<script src="script.js"></script>
+</html>

@@ -1,0 +1,13 @@
+.box-hidden {
+	display: none;
+}
+
+/* ensure box is displayed block during the transition  */
+.box-transition.box-hidden {
+	display: grid;
+	opacity: 0;
+}
+
+.box-transition {
+	transition: opacity 1s linear;
+}
